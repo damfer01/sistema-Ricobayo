@@ -4,8 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": " src/server.ts",
-    "start": "node dist/server.js"
+    "build": "tsc --declaration",
+    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
+    "start": "node dist/server.js",
+    "postinstall": "tsc"
   },
   "engines": {
     "node": "22.0.0",
