@@ -1,24 +1,24 @@
+// Rota de produtor
 const { Router  } = require('express')
-const routerr = Router();
-const productRouter = require("../Controllers/productController")
+const router = Router();
+const productController = require("../Controllers/productController")
 
 const {authenticate} = require("../config/auth")
 
-     //Validar o login
-// import { storeCaixa } from "../Validation/indexCaixa";
+     //Validar  o produtor
+ import { store } from '../validation/productStore' ; 
 
-   //validar a caixa
-// import { caixaValidation } from "../Validation/caixaValidation";
-
+   //validar o produtor
+import {productValidation} from '../validation/productValidation'
 console.log(' produtos  em rotas!!!')
 
-routerr.post('/', authenticate, productRouter.create);
-routerr.get('/', authenticate, productRouter.index);
-routerr.get('/:id', authenticate, productRouter.show);
-routerr.put('/:id', authenticate, productRouter.update);
-routerr.delete('/:id', authenticate, productRouter.delete)
+router.post('/', authenticate,productValidation, store,productController.create);
+router.get('/', authenticate, productController.index);
+router.get('/:id', authenticate, productController.show);
+router.put('/:id', authenticate, productController.update);
+router.delete('/:id', authenticate, productController.delete)
 
 
-module.exports = routerr;
+module.exports = router;
 
 export {};

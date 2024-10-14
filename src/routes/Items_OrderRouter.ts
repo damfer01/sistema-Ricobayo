@@ -1,24 +1,18 @@
-const { Router  } = require('express')
-const routerr = Router();
-const itemsOrderRouter = require("../Controllers/Items_OrderController")
+const { Router } = require('express')
+const router = Router();
+const itemsOrderController = require("../Controllers/Items_OrderController")
 
-const {authenticate} = require("../config/auth")
-
-     //Validar o login
-// import { storeCaixa } from "../Validation/indexCaixa";
-
-   //validar a caixa
-// import { caixaValidation } from "../Validation/caixaValidation";
+const { authenticate } = require("../config/auth")
 
 console.log(' items-order em rotas!!!')
 
-routerr.post('/', authenticate, itemsOrderRouter.create);
-routerr.get('/', authenticate, itemsOrderRouter.index);
-routerr.get('/:id', authenticate, itemsOrderRouter.show);
-routerr.put('/:id', authenticate, itemsOrderRouter.update);
-routerr.delete('/:id', authenticate, itemsOrderRouter.delete)
+router.post('/', authenticate, itemsOrderController.create);
+router.get('/', authenticate, itemsOrderController.index);
+router.get('/:id', authenticate, itemsOrderController.show);
+router.put('/:id', authenticate, itemsOrderController.update);
+router.delete('/:id', authenticate, itemsOrderController.delete)
 
 
-module.exports = routerr;
+module.exports = router;
 
-export {};
+export { };

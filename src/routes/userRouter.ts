@@ -1,19 +1,19 @@
 const { Router } = require('express')
 const router = Router();
 
-const userRouter = require("../Controllers/userController");
+const userController = require("../Controllers/userController");
 
-// import { store } from '../Validation/indexUsuario';
+ import { store } from '../validation/userStore';
 
-// import { loginValidation } from "../Validation/loginValidation";
+import {userValidation} from '../validation/userValidation'
 
 console.log('Usuario em rotas !!!')
 
-router.post('/',  userRouter.create);
-router.get('/', userRouter.index);
-router.get('/:id', userRouter.show);
-router.put('/:id', userRouter.update);
-router.delete('/:id', userRouter.delete)
+router.post('/', userValidation, store,   userController.create);
+router.get('/', userController.index);
+router.get('/:id', userController.show);
+router.put('/:id', userController.update);
+router.delete('/:id', userController.delete)
 
 
 module.exports = router;

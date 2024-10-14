@@ -2,7 +2,7 @@ const { Router } = require('express');
 const routes = Router();
 
 const itemsOrder = require('./Items_OrderRouter');
-const order = require('./orderRoutre')
+const order = require('./orderRouter')
 const productRouter = require('./productRouter')
 const AuthRoutes = require('../Routes/authRouter');
 

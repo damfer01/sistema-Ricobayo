@@ -4,11 +4,11 @@ const router = Router();
 const authController = require('../Controllers/authContrloller')
 
 //VALIDACAO DO LOGIN \\
-// import { store } from '../Validation/indexUsuario';
-// import { loginValidation } from "../Validation/loginValidation";
+import { store } from "../validation/userStore";
+import { userValidation } from "../validation/userValidation";
 
 //ROTA DO LOGIN
-router.post('/register' ,authController.create);
+router.post('/register' , userValidation , store,authController.create);
 router.post('/login'  ,authController.login);
 module.exports = router ;
 
