@@ -18,11 +18,11 @@ mongoose.connection
         console.log('error:', error);
     });
 
-    app.use(body.json());
+app.use(body.json());
 
-    app.use(router);
+app.use(router);
 
-    // PORTA DE ENTRADA||SAIDA
-    server.listen(process.env.PORT || 3333, () => {
-        console.log('O servidor está rodando na porta');
-    });
+// PORTA DE ENTRADA||SAIDA
+server.listen(process.env.PORT || 3333, () => {
+    console.log('O servidor está rodando na porta');
+});

@@ -8,8 +8,8 @@ import { store } from "../validation/userStore";
 import { userValidation } from "../validation/userValidation";
 
 //ROTA DO LOGIN
-router.post('/register' , userValidation , store,authController.create);
-router.post('/login'  ,authController.login);
-module.exports = router ;
+router.post('/register', userValidation, store, authController.create);
+router.post('/login', authController.login);
+module.exports = router;
 
-export{};
+export { };

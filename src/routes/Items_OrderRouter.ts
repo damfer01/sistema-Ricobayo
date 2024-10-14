@@ -12,7 +12,6 @@ router.get('/:id', authenticate, itemsOrderController.show);
 router.put('/:id', authenticate, itemsOrderController.update);
 router.delete('/:id', authenticate, itemsOrderController.delete)
 
-
 module.exports = router;
 
 export { };

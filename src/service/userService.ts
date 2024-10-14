@@ -6,17 +6,17 @@ const authService = require('./authService');
 
 module.exports = {
 
-    async create(name , password) {
-        const user = await User.findOne({name});
+    async create(name, password) {
+        const user = await User.findOne({ name });
 
-        if(!!user) return {success: false , message: ' usuario ja cadastrado'}
-        const hash = await bcrypt.hash(password , 10);
+        if (!!user) return { success: false, message: ' usuario ja cadastrado' }
+        const hash = await bcrypt.hash(password, 10);
 
         await User.create({
             name,
-            password:hash
+            password: hash
         });
-        const { result} = await authService.create(name , password);
+        const { result } = await authService.create(name, password);
 
         return {
             success: true,
@@ -25,13 +25,13 @@ module.exports = {
         };
     },
 
-    async index(){
+    async index() {
         const users = await User.find();
 
-        return{
+        return {
             success: true,
             message: 'recovered',
-           result: users
+            result: users
         }
     },
 
@@ -47,8 +47,8 @@ module.exports = {
 
     async update(id, name, passsword) {
         await User.findByIdAndUpdate(id, {
-          name, 
-          passsword
+            name,
+            passsword
         });
 
         return { success: true, message: 'sucesso' };

@@ -3,8 +3,8 @@ const product = require('../schema/productSchema');
 
 module.exports = {
 
-    async create(user_id, name, sale, description,data, ingredients) {
-        
+    async create(user_id, name, sale, description, data, ingredients) {
+
         await product.create({
             name,
             sale,
@@ -18,7 +18,7 @@ module.exports = {
     },
 
     async index(user_id: string) {
-        const users = await product.find({usuarioId: user_id});
+        const users = await product.find({ usuarioId: user_id });
 
         return {
             success: true,
@@ -29,7 +29,7 @@ module.exports = {
     },
 
     async show(user_id, id) {
-        const user = await product.find({_id: id, usuarioId: user_id});
+        const user = await product.find({ _id: id, usuarioId: user_id });
 
         return {
             success: true,
@@ -38,8 +38,8 @@ module.exports = {
         };
     },
 
-    async update(user_id, id, name, sale, description, data,ingredients) {
-        await product.findOneAndUpdate({_id: id, usuarioId: user_id}, {
+    async update(user_id, id, name, sale, description, data, ingredients) {
+        await product.findOneAndUpdate({ _id: id, usuarioId: user_id }, {
             name,
             sale,
             description,
@@ -52,7 +52,7 @@ module.exports = {
 
     async delete(user_id, id) {
         console.log(id)
-        await product.findOneAndDelete({_id: id, usuarioId: user_id});
+        await product.findOneAndDelete({ _id: id, usuarioId: user_id });
 
         return {
             success: true,

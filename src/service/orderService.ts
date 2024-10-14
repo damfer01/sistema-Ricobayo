@@ -3,10 +3,10 @@ const order = require('../schema/orderSchema');
 module.exports = {
 
     async create(user_id, table_number, data,) {
-        
+
         await order.create({
             table_number,
-             data,
+            data,
             usuarioId: user_id,
         });
 
@@ -14,7 +14,7 @@ module.exports = {
     },
 
     async index(user_id: string) {
-        const users = await order.find({usuarioId: user_id});
+        const users = await order.find({ usuarioId: user_id });
 
         return {
             success: true,
@@ -25,7 +25,7 @@ module.exports = {
     },
 
     async show(user_id, id) {
-        const user = await order.find({_id: id, usuarioId: user_id});
+        const user = await order.find({ _id: id, usuarioId: user_id });
 
         return {
             success: true,
@@ -34,10 +34,10 @@ module.exports = {
         };
     },
 
-    async update(user_id, id, table_number ,  data) {
-        await order.findOneAndUpdate({_id: id, usuarioId: user_id}, {
-            table_number ,
-                        data,
+    async update(user_id, id, table_number, data) {
+        await order.findOneAndUpdate({ _id: id, usuarioId: user_id }, {
+            table_number,
+            data,
         });
 
         return { success: true, message: 'sucesso' };
@@ -45,7 +45,7 @@ module.exports = {
 
     async delete(user_id, id) {
         console.log(id)
-        await order.findOneAndDelete({_id: id, usuarioId: user_id});
+        await order.findOneAndDelete({ _id: id, usuarioId: user_id });
 
         return {
             success: true,
