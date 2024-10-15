@@ -40,7 +40,7 @@ module.exports = {
             data,
         });
 
-        return { success: true, message: 'sucesso' };
+        return { success: true, message: 'success' };
     },
 
     async delete(user_id, id) {

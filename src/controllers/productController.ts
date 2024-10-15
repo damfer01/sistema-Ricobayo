@@ -1,19 +1,20 @@
 const Service = require('../Service/productService');
 
+
 module.exports = {
     async create(req, res) {
         const user_id = req.user_id;
         try {
             const {
                 name,
-                description,
                 sale,
+                description,
                 data,
                 ingredients,
                 
             } = req.body;
 
-            const response = await Service.create(user_id, name, description, sale, data, ingredients,);
+            const response = await Service.create(user_id, name, sale, description, data, ingredients,);
 
             return res.json(response);
         } catch (error) {
@@ -64,11 +65,12 @@ module.exports = {
             const {
                 name,
                 sale,
-                ingredients,
+                description,
                 data,
+                ingredients,
             } = req.body;
 
-            const response = await Service.update(user_id, id, name,  sale, ingredients,   data);
+            const response = await Service.update(user_id, id, name,  sale, description ,   data, ingredients, );
 
             return res.json(response);
         } catch (error) {
