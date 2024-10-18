@@ -1,28 +1,22 @@
 const router = require('./routes')
 const cors = require('cors');
 const express = require('express');
-
+const bodyParser = require('body-parser');
 const app = express();
-const server = require('http').Server(app);
-
+ const db = require('./BD/db')
 
 app.use(cors());
+app.use(bodyParser.json());
 app.use(express.json());
-const mongoose = require('mongoose');
-const body = require('body-parser')
-mongoose.connect("mongodb+srv://kaua:283186@cluster0.9m3dc2c.mongodb.net/register_box?retryWrites=true&w=majority");
 
-mongoose.connection
-    .once('open', () => console.log('ate agora deu certo !!!'))
-    .on('error', (error) => {
-        console.log('error:', error);
-    });
-
-app.use(body.json());
 
 app.use(router);
 
 // PORTA DE ENTRADA||SAIDA
-server.listen(process.env.PORT || 3333, () => {
-    console.log('O servidor está rodando na porta');
-});
+db.query('SELECT 1')
+.then(() => {
+    console.log('Conexão feita com sucesso')
+    app.listen(3000, () =>{
+        console.log('O servidor está rodando na porta 3000');
+    });
+}).catch((err) => console.log('conexão com Banco de dados Falhou !!!. \n' +err))

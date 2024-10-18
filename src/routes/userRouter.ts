@@ -5,11 +5,11 @@ const userController = require("../Controllers/userController");
 
 import { store } from '../validation/userStore';
 
-import { userValidation } from '../validation/userValidation'
+// import {  } from '../validation/'
 
 console.log('Usuario em rotas !!!')
 
-router.post('/', userValidation, store, userController.create);
+router.post('/',  userController.create);
 router.get('/', userController.index);
 router.get('/:id', userController.show);
 router.put('/:id', userController.update);

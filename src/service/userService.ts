@@ -1,66 +1,48 @@
+const { connection }  = require('../BD/db') ;
+import bcrypt from 'bcrypt';
 
-const bcrypt = require('bcrypt');
-
-const User = require('../schema/loginSchema');
-const authService = require('./authService');
-
-module.exports = {
-
-    async create(name, password) {
-        const user = await User.findOne({ name });
-
-        if (!!user) return { success: false, message: ' usuario ja cadastrado' }
-        const hash = await bcrypt.hash(password, 10);
-
-        await User.create({
-            name,
-            password: hash
-        });
-        const { result } = await authService.create(name, password);
-
-        return {
-            success: true,
-            message: 'Usuário cadastrado com sucesso',
-            result
-        };
-    },
-
-    async index() {
-        const users = await User.find();
-
-        return {
-            success: true,
-            message: 'recovered',
-            result: users
-        }
-    },
-
-    async show(id) {
-        const user = await User.findById(id);
-
-        return {
-            success: true,
-            message: ' user recovered success',
-            result: user,
-        };
-    },
-
-    async update(id, name, passsword) {
-        await User.findByIdAndUpdate(id, {
-            name,
-            passsword
-        });
-
-        return { success: true, message: 'sucesso' };
-    },
-
-    async delete(id) {
-        console.log(id)
-        await User.findByIdAndDelete(id);
-
-        return {
-            success: true,
-            message: ' deleted'
-        }
-    },
+// Função para criar um novo login
+export async function create(name: string, password: string) {
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const query = `
+    INSERT INTO login (name, password)
+    VALUES (?, ?)
+  `;
+  await connection.execute(query, [name, hashedPassword]);
 }
+
+// Função para buscar todos os logins
+export async function index() {
+  const query = `
+    SELECT * FROM login
+  `;
+  const [rows]: any = await connection.execute(query);
+  return rows;
+}
+
+// Função para buscar um login específico
+export async function show(id: number) {
+  const query = `
+    SELECT * FROM login WHERE id = ?
+  `;
+  const [rows]: any = await connection.execute(query, [id]);
+  return rows[0];
+}
+
+// Função para atualizar um login
+export async function update(id: number, name: string, password: string) {
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const query = `
+    UPDATE login SET name = ?, password = ? WHERE id = ?
+  `;
+  await connection.execute(query, [name, hashedPassword, id]);
+}
+
+// Função para deletar um login
+export async function deleteLogin(id: number) {
+  const query = `
+    DELETE FROM login WHERE id = ?
+  `;
+  await connection.execute(query, [id]);
+}
+export {};

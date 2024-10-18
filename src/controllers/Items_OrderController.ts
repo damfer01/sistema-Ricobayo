@@ -1,60 +1,57 @@
-const Items_OrderService = require('../service/Items_OrderService');
+import {create , index ,show , update , deleteIO } from '../service/Items_OrderService';
 
 module.exports = {
     async create(req, res) {
-        const user_id = req.user_id;
+       
         try {
             const {
                 Id_Produto,  
-                Id_Pedido,
-                data,
-                
-                
+                Id_Pedido,   
             } = req.body;
 
-            const response = await Items_OrderService.create(user_id, Id_Produto,  Id_Pedido, data, );
+            const response = await create( Id_Produto,  Id_Pedido  );
 
             return res.json(response);
         } catch (error) {
 
             console.log(error);
-            return res.json({ success: false, message: '[ERROR] ao criar ' })
+            return res.json({ success: false, })
         }
     },
     async index(req, res) {
-        const user_id = req.user_id;
+        
 
         try {
-            const response = await Items_OrderService.index(user_id);
+            const response = await index();
 
             return res.json(response);
 
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'erro de buscar' })
+            return res.json({ success: false, })
         }
 
     },
 
     async show(req, res) {
-        const user_id = req.user_id;
+     
         
         try {
             const {
                 id,
             } = req.params;
 
-            const response = await Items_OrderService.show(user_id,id);
+            const response = await show(id);
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'erro de buscar' })
+            return res.json({ success: false,  })
         }
     },
 
     async update(req, res) {
-        const user_id = req.user_id;
+     
         try {
             const {
                 id,
@@ -63,31 +60,31 @@ module.exports = {
             const {
                 Id_Produto,
                 Id_Pedido,
-                data,
+                
             } = req.body;
 
-            const response = await Items_OrderService.update(user_id, id, Id_Produto,  Id_Pedido,  data);
+            const response = await update( id, Id_Produto,  Id_Pedido ) ;
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'não foi possível criar ' })
+            return res.json({ success: false, })
         }
     },
 
     async delete(req, res) {
-        const user_id = req.user_id;
+      
         try {
             const {
                 id,
             } = req.params;
 
-            const response = await Items_OrderService.delete(user_id, id);
+            const response = await deleteIO(id);
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'falha' })
+            return res.json({ success: false, })
         }
     },
 };

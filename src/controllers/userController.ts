@@ -1,4 +1,4 @@
-const UserService = require('../service/userService');
+import { create, index, show, update, deleteLogin } from '../service/userService'
 
 
 
@@ -11,25 +11,25 @@ module.exports = {
 
             } = req.body;
 
-            const response = await UserService.create( name, password);
+            const response = await create( name, password);
 
 
             return res.json(response);
         } catch (error) {
 
             console.log(error);
-            return res.json({ success: false, message: 'failed to create user' })
+            return res.json({ success: false,  })
         }
     },
     async index(req, res) {
         try {
-            const response = await UserService.index();
+            const response = await index();
 
             return res.json(response);
 
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'erro de buscar' })
+            return res.json({ success: false,  })
         }
 
     },
@@ -40,12 +40,12 @@ module.exports = {
                 id,
             } = req.params;
 
-            const response = await UserService.show(id);
+            const response = await show(id);
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'erro de buscar' })
+            return res.json({ success: false, })
         }
     },
 
@@ -60,12 +60,12 @@ module.exports = {
                 password,
             } = req.body;
 
-            const response = await UserService.update(id,  name ,password);
+            const response = await update(id,  name ,password);
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'não foi possível criar o usuário' })
+            return res.json({ success: false, })
         }
     },
 
@@ -75,12 +75,13 @@ module.exports = {
                 id,
             } = req.params;
 
-            const response = await UserService.delete(id);
+            const response = await deleteLogin(id);
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'falha' })
+            return res.json({ success: false, })
         }
     },
 };
+export{};

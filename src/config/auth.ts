@@ -12,19 +12,19 @@ module.exports = {
         try {
             const authHeader = req.headers.authorzation;
 
-            if (!authHeader) return res.status(401).json({ success: false, message: ' nenhum token relatado' });
+            if (!authHeader) return res.status(401).json({ success: false,  });
 
             const parts = authHeader.split('');
 
-            if (parts.length !== 2) return res.json({ success: false, message: 'token error' });
+            if (parts.length !== 2) return res.json({ success: false, });
 
             const [scheme, token] = parts;
 
 
-            if (!/^Bearer$/i.test(scheme)) return res.status(401).json({ success: false, message: 'O formato do token é invalido' });
+            if (!/^Bearer$/i.test(scheme)) return res.status(401).json({ success: false,  });
 
             jwt.verify(token, '1a45818e77bc815a455f3737992d37bb', (error, decoded) => {
-                if (error) return res.json({ success: false, message: 'taken invalido' });
+                if (error) return res.json({ success: false,  });
 
                 req.user_id = decoded.id;
                 

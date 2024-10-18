@@ -1,10 +1,7 @@
-import { Schema, model } from "mongoose"
 
-const message = 'Campo obligatorio'
-
-const loginSchema = new Schema({
-    name: { type: String, required: message },
-    password: { type: String, required: message },
-});
-
-module.exports = model('user', loginSchema)
+// Definindo a interface para Login
+interface LoginSchema {
+  id: number;
+  name: string;
+  password: string;
+}

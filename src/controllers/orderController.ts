@@ -1,93 +1,90 @@
-const orderService = require('../service/orderService');
+import {create , index ,show , update , deleteP }  from'../service/orderService';
 
 module.exports = {
     async create(req, res) {
-        const user_id = req.user_id;
+
         try {
             const {
-                name,  
-                order,
-                data,
-                
-                
+                table_number,
+
             } = req.body;
 
-            const response = await orderService.create(user_id, name,  order, data, );
+            const response = await create(table_number,);
 
             return res.json(response);
         } catch (error) {
 
             console.log(error);
-            return res.json({ success: false, message: '[ERROR] ao criar ' })
+            return res.json({ success: false, })
         }
     },
     async index(req, res) {
-        const user_id = req.user_id;
+
 
         try {
-            const response = await orderService.index(user_id);
+            const response = await index();
 
             return res.json(response);
 
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'erro de buscar' })
+            return res.json({ success: false,  })
         }
 
     },
 
     async show(req, res) {
-        const user_id = req.user_id;
-        
+
+
         try {
             const {
                 id,
             } = req.params;
 
-            const response = await orderService.show(user_id,id);
+            const response = await show(id);
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'erro de buscar' })
+            return res.json({ success: false,  })
         }
     },
 
     async update(req, res) {
-        const user_id = req.user_id;
+
         try {
             const {
                 id,
             } = req.params;
 
             const {
-                name,
-                order,
-                data,
+
+                table_number,
+
             } = req.body;
 
-            const response = await orderService.update(user_id, id, name,  order,  data);
+            const response = await update(id, table_number);
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'não foi possível criar ' })
+            return res.json({ success: false,  })
         }
     },
 
     async delete(req, res) {
-        const user_id = req.user_id;
+
         try {
             const {
                 id,
             } = req.params;
 
-            const response = await orderService.delete(user_id, id);
+            const response = await deleteP(id);
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'falha' })
+            return res.json({ success: false,  })
         }
     },
 };

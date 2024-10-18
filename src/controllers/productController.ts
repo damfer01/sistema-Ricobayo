@@ -1,9 +1,9 @@
-const Service = require('../Service/productService');
+const {create , index ,show , update , deleteP } = require('../service/productService');
 
 
 module.exports = {
     async create(req, res) {
-        const user_id = req.user_id;
+       
         try {
             const {
                 name,
@@ -14,49 +14,48 @@ module.exports = {
                 
             } = req.body;
 
-            const response = await Service.create(user_id, name, sale, description, data, ingredients,);
+            const response = await create( name, sale, description, data, ingredients,);
 
             return res.json(response);
         } catch (error) {
 
             console.log(error);
-            return res.json({ success: false, message: '[ERROR] ao criar produto' })
+            return res.json({ success: false, })
         }
     },
     async index(req, res) {
-        const user_id = req.user_id;
+    
 
         try {
-            const response = await Service.index(user_id);
+            
+            const response = await index();
 
             return res.json(response);
 
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'erro de buscar' })
+            return res.json({ success: false, })
         }
 
     },
 
     async show(req, res) {
-        const user_id = req.user_id;
         
         try {
             const {
                 id,
             } = req.params;
 
-            const response = await Service.show(user_id,id);
+            const response = await show();
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'erro de buscar' })
+            return res.json({ success: false,  })
         }
     },
 
     async update(req, res) {
-        const user_id = req.user_id;
         try {
             const {
                 id,
@@ -70,28 +69,27 @@ module.exports = {
                 ingredients,
             } = req.body;
 
-            const response = await Service.update(user_id, id, name,  sale, description ,   data, ingredients, );
+            const response = await update( id, name,  sale, description ,   data, ingredients, );
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'não foi possível criar o produto' })
+            return res.json({ success: false, })
         }
     },
 
     async delete(req, res) {
-        const user_id = req.user_id;
         try {
             const {
                 id,
             } = req.params;
 
-            const response = await Service.delete(user_id, id);
+            const response = await deleteP(id);
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, message: 'falha' })
+            return res.json({ success: false, })
         }
     },
 };

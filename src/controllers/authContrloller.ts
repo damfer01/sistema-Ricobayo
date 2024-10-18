@@ -14,7 +14,7 @@ module.exports = {
         return res.json(response);
       } catch (error) {
         console.log(error);
-        return res.json({ success: false, message: 'Falha ao criar usuário'});
+        return res.json({ success: false,});
       }
     },
   
@@ -29,7 +29,7 @@ module.exports = {
   
         return res.json( response );
       } catch ( err ) {
-        return res.json({ success: false, message: 'não consegui fazer login'});
+        return res.json({ success: false,});
       }
     },
   };
