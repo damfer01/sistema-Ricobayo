@@ -2,12 +2,12 @@
 const{connection } = require('../BD/db')
 
 
-export async function create( name: string , sale: string, description: string, data:string, ingredients: string) {
+export async function create( name: string , sale: string, description: string , amount:string, ingredients: string) {
     // Realizar a query para cadastrar um novo produto
-        const query= `INSERT INTO products (name, sale, description, data, ingredients) 
-        VALUES(?,?,?,?,?)`;
+        const query= `INSERT INTO products (name, sale, description, amount , ingredients) 
+        VALUES(?,?,?,?,?,?)`;
 
-        await connection.execute([name, sale, description, data, ingredients])
+        await connection.execute([name, sale, description,amount, ingredients])
 
         return { success: true,}
     }
@@ -38,10 +38,10 @@ export async function create( name: string , sale: string, description: string, 
         };
     }
 
-    export   async function update(id:number,name:string, sale:string, description:string, data:string, ingredients:string) {
+    export   async function update(id:number,name:string, sale:string, description:string, amount:string, ingredients:string) {
         // Realizar a query para atualizar um produto pelo ID
-        const query = `UPDATE products SET  name = ?, sale = ?, description = ? , data = ?, ingredients = ? WHERE id = ?`;
-        await connection.execute(query,[name, sale, description, data, ingredients , id], );
+        const query = `UPDATE products SET  name = ?, sale = ?, description = ? , amount +?, = ?, ingredients = ? WHERE id = ?`;
+        await connection.execute(query,[name, sale, description,amount, ingredients , id], );
 
         return { success: true,  };
     }

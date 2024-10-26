@@ -9,12 +9,12 @@ module.exports = {
                 name,
                 sale,
                 description,
-                data,
+                amount,
                 ingredients,
                 
             } = req.body;
 
-            const response = await create( name, sale, description, data, ingredients,);
+            const response = await create( name, sale, description, amount ,   ingredients,);
 
             return res.json(response);
         } catch (error) {
@@ -65,11 +65,11 @@ module.exports = {
                 name,
                 sale,
                 description,
-                data,
+                amount,
                 ingredients,
             } = req.body;
 
-            const response = await update( id, name,  sale, description ,   data, ingredients, );
+            const response = await update( id, name,  sale, description , amount,   ingredients, );
 
             return res.json(response);
         } catch (error) {

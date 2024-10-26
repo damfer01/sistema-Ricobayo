@@ -1,10 +1,11 @@
-import {create , index ,show , update , deleteP }  from'../service/orderService';
+import { create, index, show, update, deleteP } from '../service/orderService';
 
 module.exports = {
     async create(req, res) {
 
         try {
             const {
+                
                 table_number,
 
             } = req.body;
@@ -28,7 +29,7 @@ module.exports = {
 
         } catch (error) {
             console.log(error);
-            return res.json({ success: false,  })
+            return res.json({ success: false, })
         }
 
     },
@@ -46,7 +47,7 @@ module.exports = {
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false,  })
+            return res.json({ success: false, })
         }
     },
 
@@ -68,7 +69,7 @@ module.exports = {
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false,  })
+            return res.json({ success: false, })
         }
     },
 
@@ -84,7 +85,7 @@ module.exports = {
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false,  })
+            return res.json({ success: false, })
         }
     },
 };
