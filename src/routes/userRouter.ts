@@ -3,7 +3,7 @@ const router = Router();
 
 const userController = require("../Controllers/userController");
 
-import { store } from '../validation/userStore';
+//import { store } from '../validation/userStore';
 
 // import {  } from '../validation/'
 

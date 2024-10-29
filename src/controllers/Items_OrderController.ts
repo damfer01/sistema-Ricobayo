@@ -1,4 +1,4 @@
-import {create , index ,show , update , deleteIO } from '../service/Items_OrderService';
+const ItensOrderControl = require ('../service/Items_OrderService');
 
 module.exports = {
     async create(req, res) {
@@ -9,7 +9,7 @@ module.exports = {
                 Id_Pedido,   
             } = req.body;
 
-            const response = await create( Id_Produto,  Id_Pedido  );
+            const response = await ItensOrderControl.create( Id_Produto,  Id_Pedido  );
 
             return res.json(response);
         } catch (error) {
@@ -22,7 +22,7 @@ module.exports = {
         
 
         try {
-            const response = await index();
+            const response = await ItensOrderControl.index();
 
             return res.json(response);
 
@@ -41,7 +41,7 @@ module.exports = {
                 id,
             } = req.params;
 
-            const response = await show(id);
+            const response = await ItensOrderControl.show(id);
 
             return res.json(response);
         } catch (error) {
@@ -63,7 +63,7 @@ module.exports = {
                 
             } = req.body;
 
-            const response = await update( id, Id_Produto,  Id_Pedido ) ;
+            const response = await ItensOrderControl.update( id, Id_Produto,  Id_Pedido ) ;
 
             return res.json(response);
         } catch (error) {
@@ -79,7 +79,7 @@ module.exports = {
                 id,
             } = req.params;
 
-            const response = await deleteIO(id);
+            const response = await ItensOrderControl.delete(id);
 
             return res.json(response);
         } catch (error) {

@@ -1,4 +1,4 @@
-const {create , index ,show , update , deleteP } = require('../service/productService');
+const Products = require('../service/productService');
 
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
                 
             } = req.body;
 
-            const response = await create( name, sale, description, amount ,   ingredients,);
+            const response = await Products.create( name, sale, description, amount ,   ingredients,);
 
             return res.json(response);
         } catch (error) {
@@ -28,7 +28,7 @@ module.exports = {
 
         try {
             
-            const response = await index();
+            const response = await Products.index();
 
             return res.json(response);
 
@@ -46,7 +46,7 @@ module.exports = {
                 id,
             } = req.params;
 
-            const response = await show();
+            const response = await Products.show();
 
             return res.json(response);
         } catch (error) {
@@ -69,7 +69,7 @@ module.exports = {
                 ingredients,
             } = req.body;
 
-            const response = await update( id, name,  sale, description , amount,   ingredients, );
+            const response = await Products.update( id, name,  sale, description , amount,   ingredients, );
 
             return res.json(response);
         } catch (error) {
@@ -84,7 +84,7 @@ module.exports = {
                 id,
             } = req.params;
 
-            const response = await deleteP(id);
+            const response = await Products.delete(id);
 
             return res.json(response);
         } catch (error) {

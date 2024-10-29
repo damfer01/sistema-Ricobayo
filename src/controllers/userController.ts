@@ -1,6 +1,5 @@
-import { create, index, show, update, deleteLogin } from '../service/userService'
 
-
+const userService = require('../service/userService');
 
 module.exports = {
     async create(req, res) {
@@ -11,7 +10,7 @@ module.exports = {
 
             } = req.body;
 
-            const response = await create( name, password);
+            const response = await userService.create( name, password);
 
 
             return res.json(response);
@@ -23,7 +22,7 @@ module.exports = {
     },
     async index(req, res) {
         try {
-            const response = await index();
+            const response = await userService.index();
 
             return res.json(response);
 
@@ -40,7 +39,7 @@ module.exports = {
                 id,
             } = req.params;
 
-            const response = await show(id);
+            const response = await userService.show(id);
 
             return res.json(response);
         } catch (error) {
@@ -60,7 +59,7 @@ module.exports = {
                 password,
             } = req.body;
 
-            const response = await update(id,  name ,password);
+            const response = await userService.update(id,  name ,password);
 
             return res.json(response);
         } catch (error) {
@@ -75,7 +74,7 @@ module.exports = {
                 id,
             } = req.params;
 
-            const response = await deleteLogin(id);
+            const response = await userService.delete(id);
 
             return res.json(response);
         } catch (error) {

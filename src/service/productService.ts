@@ -1,62 +1,62 @@
 
-const{connection } = require('../BD/db')
+const ProductsSchema = require('../Schema/productSchema');
 
+module.exports = {
 
-export async function create( name: string , sale: string, description: string , amount:string, ingredients: string) {
-    // Realizar a query para cadastrar um novo produto
-        const query= `INSERT INTO products (name, sale, description, amount , ingredients) 
-        VALUES(?,?,?,?,?,?)`;
+    async create(user_id, name, sale, description,amont, ingredients) {
+        
+        await ProductsSchema.create({
+            name,
+            sale,
+            description,
+            amont,
+            ingredients,
+            usuarioId: user_id,
+        });
 
-        await connection.execute([name, sale, description,amount, ingredients])
+        return { success: true, message: 'sucesso' };
+    },
 
-        return { success: true,}
-    }
+    async index(user_id: string) {
+        const users = await ProductsSchema.find({usuarioId: user_id});
 
-    export  async  function index() {
-        // Realizar a query para recuperar todos os produtos
-            const query = `SELECT * FROM products`;
-
-            const [rows ]: any = await connection.execute(query);
         return {
             success: true,
-          
-            result: rows,
+            message: ' recovered',
+            result: users,
 
         };
-    }
+    },
 
-    export async function show( id:number) {
-        // Realizar a query para recuperar um produto pelo ID
-        const query = `SELECT * FROM products WHERE id = ?`;
-
-        const [rows] :any = await connection.execute(query, [id] );
+    async show(user_id, id) {
+        const user = await ProductsSchema.find({_id: id, usuarioId: user_id});
 
         return {
             success: true,
-           
-            result: rows[0],
+            message: ' user recovered success',
+            result: user,
         };
-    }
+    },
 
-    export   async function update(id:number,name:string, sale:string, description:string, amount:string, ingredients:string) {
-        // Realizar a query para atualizar um produto pelo ID
-        const query = `UPDATE products SET  name = ?, sale = ?, description = ? , amount +?, = ?, ingredients = ? WHERE id = ?`;
-        await connection.execute(query,[name, sale, description,amount, ingredients , id], );
+    async update(user_id, id, name, sale, description, amont,ingredients) {
+        await ProductsSchema.findOneAndUpdate({_id: id, usuarioId: user_id}, {
+            name,
+            sale,
+            description,
+            amont,
+            ingredients,
+        });
 
-        return { success: true,  };
-    }
+        return { success: true, message: 'sucesso' };
+    },
 
-    export   async function deleteP(id:number) {
-       const  query = `DELETE FROM products WHERE id = ?`;
-
-        await connection.execute(query, [id]);
+    async delete(user_id, id) {
+        console.log(id)
+        await ProductsSchema.findOneAndDelete({_id: id, usuarioId: user_id});
 
         return {
             success: true,
-           
+            message: ' deleted'
         }
-    }
-
-
-export {};
-
+    },
+};

@@ -1,7 +1,15 @@
 
-// Definindo a interface para Login
-interface LoginSchema {
-  id: number;
-  name: string;
-  password: string;
-}
+const DB = require("mongoose") ;
+ const message = 'campo obrigatorio'
+const  user = new DB.Schema({
+  
+    name:{ type: String , required : message },
+
+   password:{type: String },
+
+});
+
+const Usermon = DB.models.Usermon|| DB.model('User', user)
+
+module.exports = Usermon;
+

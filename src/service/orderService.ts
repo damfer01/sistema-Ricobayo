@@ -1,60 +1,57 @@
-const { connection } = require('../BD/db')
 
+const OrderSchema = require('../Schema/orderSchema');
 
-export async function create(table_number: String) {
-    // Realizar a query para cadastrar um novo produto
-    const query = `INSERT INTO order_product (table_number) 
-        VALUES(?)`;
+module.exports = {
 
-    await connection.execute([table_number])
+    async create(user_id ,table_number  ) {
+        
+        await OrderSchema.create({
+            
+            table_number,
+            usuarioId: user_id,
+        });
 
-    return { success: true, }
-}
+        return { success: true, message: 'sucesso' };
+    },
 
-export async function index() {
-    // Realizar a query para recuperar todos os produtos
-    const query = `SELECT * FROM order_product`;
+    async index(user_id: string) {
+        const users = await OrderSchema.find({usuarioId: user_id});
 
-    const [rows]: any = await connection.execute(query);
-    return {
-        success: true,
-      
-        result: rows,
+        return {
+            success: true,
+            message: ' recovered',
+            result: users,
 
-    };
-}
+        };
+    },
 
-export async function show(id: number) {
-    // Realizar a query para recuperar um produto pelo ID
-    const query = `SELECT * FROM order_product WHERE id = ?`;
+    async show(user_id, id) {
+        const user = await OrderSchema.find({_id: id, usuarioId: user_id});
 
-    const [rows]: any = await connection.execute(query, [id]);
+        return {
+            success: true,
+            message: ' user recovered success',
+            result: user,
+        };
+    },
 
-    return {
-        success: true,
-      
-        result: rows[0],
-    };
-}
+    async update(user_id, id, table_number ) {
+        await OrderSchema.findOneAndUpdate({_id: id, usuarioId: user_id}, {
+            
+            table_number,
+            
+        });
 
-export async function update(id: number, table_number: string) {
-    // Realizar a query para atualizar um produto pelo ID
-    const query = `UPDATE order_product SET  table_number = ? WHERE id = ?`;
-    await connection.execute(query, [table_number, id],);
+        return { success: true, message: 'sucesso' };
+    },
 
-    return { success: true, };
-}
+    async delete(user_id, id) {
+        console.log(id)
+        await OrderSchema.findOneAndDelete({_id: id, usuarioId: user_id});
 
-export async function deleteP(id: number) {
-    const query = `DELETE FROM order_product WHERE id = ?`;
-
-    await connection.execute(query, [id]);
-
-    return {
-        success: true,
-       
-    }
-}
-
-
-export { };
+        return {
+            success: true,
+            message: ' deleted'
+        }
+    },
+};

@@ -1,4 +1,4 @@
-import { create, index, show, update, deleteP } from '../service/orderService';
+const OrderContro = require ('../service/orderService');
 
 module.exports = {
     async create(req, res) {
@@ -10,7 +10,7 @@ module.exports = {
 
             } = req.body;
 
-            const response = await create(table_number,);
+            const response = await OrderContro.create(table_number,);
 
             return res.json(response);
         } catch (error) {
@@ -23,7 +23,7 @@ module.exports = {
 
 
         try {
-            const response = await index();
+            const response = await OrderContro.index();
 
             return res.json(response);
 
@@ -42,7 +42,7 @@ module.exports = {
                 id,
             } = req.params;
 
-            const response = await show(id);
+            const response = await OrderContro.show(id);
 
             return res.json(response);
         } catch (error) {
@@ -64,7 +64,7 @@ module.exports = {
 
             } = req.body;
 
-            const response = await update(id, table_number);
+            const response = await OrderContro.update(id, table_number);
 
             return res.json(response);
         } catch (error) {
@@ -80,7 +80,7 @@ module.exports = {
                 id,
             } = req.params;
 
-            const response = await deleteP(id);
+            const response = await OrderContro.delete(id);
 
             return res.json(response);
         } catch (error) {

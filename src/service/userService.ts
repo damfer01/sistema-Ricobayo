@@ -1,48 +1,65 @@
-const { connection }  = require('../BD/db') ;
-import bcrypt from 'bcrypt';
+const bcrypt = require('bcrypt');
 
-// Função para criar um novo login
-export async function create(name: string, password: string) {
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const query = `
-    INSERT INTO login (name, password)
-    VALUES (?, ?)
-  `;
-  await connection.execute(query, [name, hashedPassword]);
-}
+const User = require('../Schema/loginSchema');
+const authService = require('./authService')
 
-// Função para buscar todos os logins
-export async function index() {
-  const query = `
-    SELECT * FROM login
-  `;
-  const [rows]: any = await connection.execute(query);
-  return rows;
-}
+module.exports = {
 
-// Função para buscar um login específico
-export async function show(id: number) {
-  const query = `
-    SELECT * FROM login WHERE id = ?
-  `;
-  const [rows]: any = await connection.execute(query, [id]);
-  return rows[0];
-}
+    async create(name,  password) {
+        const user = await User.findOne({name});
+        
+        if(!!user) return {success:false , message:'usuário já cadastrado'}
+        const hash = await  bcrypt.hash(password, 10);
 
-// Função para atualizar um login
-export async function update(id: number, name: string, password: string) {
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const query = `
-    UPDATE login SET name = ?, password = ? WHERE id = ?
-  `;
-  await connection.execute(query, [name, hashedPassword, id]);
-}
+        await User.create({
+            name,
+            password:hash,
+        });
+        const {result} = await authService.create(name ,  password);
 
-// Função para deletar um login
-export async function deleteLogin(id: number) {
-  const query = `
-    DELETE FROM login WHERE id = ?
-  `;
-  await connection.execute(query, [id]);
-}
-export {};
+        return {
+            success: true,
+            message: 'user successfully created',
+            result,
+          };    
+    },
+
+    async index() {
+        const users = await User.find();
+
+        return {
+            success: true,
+            message: ' recovered',
+            result: users,
+        };
+    },
+
+    async show(id) {
+        const user = await User.findById(id);
+
+        return {
+            success: true,
+            message: ' user recovered success',
+            result: user,
+        };
+    },
+
+    async update(id, name,  password) {
+        await User.findByIdAndUpdate(id, {
+            name,
+            password
+        });
+
+        return { success: true, message: 'sucesso' };
+    },
+
+    async delete(id) {
+        console.log(id)
+        await User.findByIdAndDelete(id);
+
+        return {
+            success: true,
+            message: ' deleted'
+        }
+    },
+};

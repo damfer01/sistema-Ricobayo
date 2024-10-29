@@ -7,7 +7,7 @@
         "outDir": "dist",
 
     },
-    "include": ["src/**/*", "bancDados/db.js"],
+    "include": ["src/**/*"],
 
     "export" : {}
 }

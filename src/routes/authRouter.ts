@@ -5,10 +5,10 @@
 
  //VALIDACAO DO LOGIN \\
  import { store } from "../validation/userStore";
-//  import { userValidation } from "../validation/userValidation";
+// import { userValidation } from "../validation/userValidation";
 
 // //ROTA DO LOGIN
- router.post('/register', authController.create);
+ router.post('/register',  authController.create);
  router.post('/login', authController.login);
  module.exports = router;
 
