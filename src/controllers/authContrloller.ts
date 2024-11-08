@@ -5,31 +5,31 @@ module.exports = {
     async create( req, res ) {
       try {
         const {
-             name,
-          password,
+             nome,
+          senha,
         } = req.body;
   
-        const response = await UserService.create(name, password);
+        const response = await UserService.create(nome, senha);
   
         return res.json(response);
       } catch (error) {
         console.log(error);
-        return res.json({ success: false,});
+        return res.json({ success: false, message: 'Failed to create user'});
       }
     },
   
     async login( req, res ) {
       try {
         const {
-          name,
-          password,
+          nome,
+          senha,
         } = req.body;
   
-        const response = await authService.create( name, password );
+        const response = await authService.create( nome, senha );
   
         return res.json( response );
       } catch ( err ) {
-        return res.json({ success: false,});
+        return res.json({ success: false, message: 'failed to login'});
       }
     },
   };

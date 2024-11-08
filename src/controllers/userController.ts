@@ -5,19 +5,20 @@ module.exports = {
     async create(req, res) {
         try {
             const {
-                name,
-                password,
+                
+                nome,
+                senha,
 
             } = req.body;
 
-            const response = await userService.create( name, password);
+            const response = await userService.create( nome, senha);
 
 
             return res.json(response);
         } catch (error) {
 
             console.log(error);
-            return res.json({ success: false,  })
+            return res.json({ success: false, message: 'failed to create user' })
         }
     },
     async index(req, res) {
@@ -28,7 +29,7 @@ module.exports = {
 
         } catch (error) {
             console.log(error);
-            return res.json({ success: false,  })
+            return res.json({ success: false, message: 'erro de buscar' })
         }
 
     },
@@ -44,7 +45,7 @@ module.exports = {
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, })
+            return res.json({ success: false, message: 'erro de buscar' })
         }
     },
 
@@ -55,16 +56,17 @@ module.exports = {
             } = req.params;
 
             const {
-                name,
-                password,
+                
+                nome,
+                senha,
             } = req.body;
 
-            const response = await userService.update(id,  name ,password);
+            const response = await userService.update(id,  nome ,senha);
 
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, })
+            return res.json({ success: false, message: 'não foi possível criar o usuário' })
         }
     },
 
@@ -79,8 +81,7 @@ module.exports = {
             return res.json(response);
         } catch (error) {
             console.log(error);
-            return res.json({ success: false, })
+            return res.json({ success: false, message: 'falha' })
         }
     },
 };
-export{};

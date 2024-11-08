@@ -6,11 +6,10 @@
   "scripts": {
     "build": "tsc --declaration",
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
-    "start": "node dist/server.js",
-    "postinstall": "tsc"
+    "start": "node dist/server.js"
   },
   "engines": {
-    "node": "22.0.0",
+    "node": "22.11.0",
     "yarn": "1.22.19"
   },
   "dependencies": {
@@ -22,7 +21,7 @@
     "express-validator": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.10.0",
-    "mongoose": "^8.7.3"
+    "mongoose": "^8.8.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",

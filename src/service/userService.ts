@@ -1,21 +1,22 @@
 const bcrypt = require('bcrypt');
 
-const User = require('../Schema/loginSchema');
+const User = require('../Schema/registerSchema');
 const authService = require('./authService')
 
 module.exports = {
 
-    async create(name,  password) {
-        const user = await User.findOne({name});
+    async create( nome, senha) {
+        const user = await User.findOne({nome});
         
         if(!!user) return {success:false , message:'usuário já cadastrado'}
-        const hash = await  bcrypt.hash(password, 10);
+        const hash = await  bcrypt.hash(senha, 10);
 
         await User.create({
-            name,
-            password:hash,
+            
+            nome,
+            senha:hash,
         });
-        const {result} = await authService.create(name ,  password);
+        const {result} = await authService.create(nome, senha);
 
         return {
             success: true,
@@ -44,10 +45,10 @@ module.exports = {
         };
     },
 
-    async update(id, name,  password) {
+    async update(id,  nome,) {
         await User.findByIdAndUpdate(id, {
-            name,
-            password
+            
+            nome,
         });
 
         return { success: true, message: 'sucesso' };

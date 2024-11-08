@@ -14,7 +14,6 @@ app.use(express.json());
 
 
 const mongoose = require('mongoose');
-const body = require('body-parser')
 mongoose.connect("mongodb+srv://kaua:283186@cluster0.9m3dc2c.mongodb.net/snack-hub?retryWrites=true&w=majority");
 
 mongoose.connection
@@ -23,7 +22,6 @@ mongoose.connection
         console.log('error:', error);
     });
 
-    app.use(body.json());
 
     app.use(rotas);
 

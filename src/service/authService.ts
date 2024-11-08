@@ -1,26 +1,26 @@
 const bcrypt = require('bcrypt');
 
-const User = require('../schema/loginSchema');
+const User = require('../schema/registerSchema');
 const { generateToken } = require('../config/auth')
 
 module.exports = {
 
-    async create(name, passsword) {
-        const user = await User.findOne({ name }).select('+password');
+    async create(nome, passsword) {
+        const userAuth = await User.findOne({ nome }).select('+senha');
 
-        if (!user) return { success: false };
+        if (!userAuth) return { success: false };
 
-        const checkPass = await bcrypt.compare(passsword, user.password);
+        const checkPass = await bcrypt.compare(passsword, userAuth.senha);
 
-        if (!checkPass) return { success: false };
+        if (!checkPass) return { success: false, message: 'Credenciais invalidas' };
 
-        const token = await generateToken(user._id);
+        const token = await generateToken(userAuth._id);
 
         return {
             success: true,
-    
+            message: 'login efetivado com sucesso',
             result: {
-                empresa: user.empresa,
+                nome: userAuth.nome,
                 token,
             },
         };
